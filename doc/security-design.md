@@ -1,4 +1,4 @@
-can# Symphony — Security & MCP Client Design
+can# Vageesh — Security & MCP Client Design
 
 ## Status: In Progress
 Last updated: 2026-09-02

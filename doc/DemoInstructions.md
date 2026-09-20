@@ -1,4 +1,4 @@
-# Symphony — Demo Instructions
+# Vageesh — Demo Instructions
 
 ---
 
@@ -7,7 +7,7 @@
 ### Option A — Docker (recommended, single command)
 
 ```bash
-cd symph-back-end
+cd vageesh-back-end
 cp .env.example .env
 # Edit .env — add ANTHROPIC_API_KEY (required) and Slack tokens (optional)
 docker compose up --build
@@ -30,16 +30,16 @@ Subsequent runs: `docker compose up` (no `--build` needed).
 psql -U postgres -c "CREATE DATABASE symphony;"
 
 # Terminal 1 — Backend
-cd symph-back-end && workon symphony
+cd vageesh-back-end && workon symphony
 alembic upgrade head
 fastapi dev app/main.py        # → http://127.0.0.1:8000/docs
 
 # Terminal 2 — Frontend
-cd symph-front-end && npm install && npm run dev
+cd vageesh-front-end && npm install && npm run dev
 # → http://localhost:5173/src/html/agents.html
 ```
 
-> In local dev, set `BASE_URL = "http://localhost:8000"` in `symph-front-end/src/js/api.js`.
+> In local dev, set `BASE_URL = "http://localhost:8000"` in `vageesh-front-end/src/js/api.js`.
 
 ---
 
@@ -59,7 +59,7 @@ cd symph-front-end && npm install && npm run dev
 
 ---
 
-## pgAdmin — Connecting to the Symphony Database
+## pgAdmin — Connecting to the Vageesh Database
 
 pgAdmin is the recommended GUI for inspecting database state during demos.
 
@@ -72,7 +72,7 @@ brew install --cask pgadmin4
 ### Register the server (one-time)
 
 1. Open pgAdmin → right-click **Servers → Register → Server**
-2. **General tab** — Name: `Symphony Local`
+2. **General tab** — Name: `Vageesh Local`
 3. **Connection tab**:
    - Host: `localhost`
    - Port: `5432`
@@ -81,10 +81,10 @@ brew install --cask pgadmin4
    - Password: `postgres`
 4. Click **Save**
 
-### Navigate to the Symphony database
+### Navigate to the Vageesh database
 
 ```
-Servers → Symphony Local → Databases → symphony → Schemas → public → Tables
+Servers → Vageesh Local → Databases → symphony → Schemas → public → Tables
 ```
 
 Right-click any table → **View/Edit Data → All Rows**.
@@ -209,10 +209,10 @@ INFO  Slack bot connected via Socket Mode.
 ```
 
 ### Step 3 — Send a direct message
-In Slack, open a DM with your Symphony bot and send any message. The bot replies using the configured agent's model and system prompt.
+In Slack, open a DM with your Vageesh bot and send any message. The bot replies using the configured agent's model and system prompt.
 
 ### Step 4 — Test @mention
-In any channel where the bot is invited, type `@SymphonyBot Hello`. The bot strips the mention prefix and replies.
+In any channel where the bot is invited, type `@VageeshBot Hello`. The bot strips the mention prefix and replies.
 
 ### Step 5 — Verify message persistence
 Messages are stored in the `messages` table and visible in the UI (messages.html) or via:
@@ -246,7 +246,7 @@ Navigate to `/mcp` in the UI. You will see:
 ### Step 2 — Connect Claude Desktop
 1. In the UI, click **Copy Config** in the Server Info card
 2. Paste into your Claude Desktop `claude_desktop_config.json` under `mcpServers`
-3. Restart Claude Desktop — Symphony will appear as an MCP server in the tool list
+3. Restart Claude Desktop — Vageesh will appear as an MCP server in the tool list
 4. Ask Claude Desktop: *"What do you know about [topic]?"* — it will call `search_knowledge`
 
 ### Step 3 — Test via curl
@@ -261,7 +261,7 @@ curl -X POST http://localhost:8000/mcp/ \
 curl -X POST http://localhost:8000/mcp/ \
   -H "X-MCP-API-Key: <your-key>" \
   -H "Content-Type: application/json" \
-  -d '{"method":"tools/call","params":{"name":"add_knowledge","arguments":{"title":"Test Doc","content":"Symphony is an AI orchestration platform.","caller_id":"curl:demo"}}}'
+  -d '{"method":"tools/call","params":{"name":"add_knowledge","arguments":{"title":"Test Doc","content":"Vageesh is an AI orchestration platform.","caller_id":"curl:demo"}}}'
 ```
 
 ### Step 4 — Verify audit log
@@ -275,7 +275,7 @@ ORDER BY created_at DESC LIMIT 20;
 With `MCP_API_KEY` set and an agent configured for Slack:
 1. Add a memory entry via the Agent Config page (e.g. key: `preferred_currency`, value: `GBP`)
 2. Upload a document on the Knowledge Base page
-3. DM the Symphony bot in Slack — the reply will be grounded in the agent memory and document content
+3. DM the Vageesh bot in Slack — the reply will be grounded in the agent memory and document content
 4. Check the audit log: two new rows appear per message (`list_memory` + `search_knowledge`)
 
 ### Troubleshooting
@@ -305,7 +305,7 @@ With `MCP_API_KEY` set and an agent configured for Slack:
 ### Trigger traces
 
 - **Workflow**: run any workflow with an Agent node
-- **Slack**: send a DM or @mention to the Symphony bot
+- **Slack**: send a DM or @mention to the Vageesh bot
 
 ### Filter traces
 
@@ -316,7 +316,7 @@ Use the **Filter** bar to narrow by status, model, latency, or date range.
 ## Data Ingestion Pipeline — Testing
 
 ### Prerequisites
-- `DATASET_DIR` set in `.env` pointing to the `symph-prgm-mgmt/dataset` directory
+- `DATASET_DIR` set in `.env` pointing to the `vageesh-prgm-mgmt/dataset` directory
 - `SLACK_REPORT_CHANNEL` set in `.env` (e.g. `data-reports`) — bot must be invited to that channel
 - `ANTHROPIC_API_KEY` set (the Report Agent node calls Claude)
 
@@ -407,7 +407,7 @@ Or open the workflow in the UI and click **Run**.
 ### Step 3 — Check Slack `#job-summary`
 
 ```
-*Symphony Job Health Summary — Last 24h*
+*Vageesh Job Health Summary — Last 24h*
 • Total runs: 8  |  Success rate: 87.5%
 ✅ Completed: 7  ❌ Failed: 1  🔄 Running: 0  ⏳ Pending: 0
 
@@ -426,7 +426,7 @@ SELECT id, status, started_at, finished_at FROM workflow_runs ORDER BY started_a
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| No Slack message | Bot not in #job-summary | `/invite @SymphonyBot` in the channel |
+| No Slack message | Bot not in #job-summary | `/invite @VageeshBot` in the channel |
 | Empty stats | No workflow runs in DB | Run the Data Ingestion Pipeline a few times first |
 | `SLACK_BOT_TOKEN` error | Token missing | Set in `.env` and restart |
 

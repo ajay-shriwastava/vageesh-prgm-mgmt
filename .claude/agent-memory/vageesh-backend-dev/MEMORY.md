@@ -1,4 +1,4 @@
-# Symphony Backend Dev Memory
+# Vageesh Backend Dev Memory
 
 ## Tool Architecture — Dual-Wrapper Pattern
 

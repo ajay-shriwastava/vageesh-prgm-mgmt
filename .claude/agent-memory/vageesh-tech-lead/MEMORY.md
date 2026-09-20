@@ -1,4 +1,4 @@
-# Symphony Tech Lead Memory
+# Vageesh Tech Lead Memory
 
 ## Architecture Decisions
 
@@ -8,7 +8,7 @@
 - Auth: JWT stub in `app/dependencies.py` — `get_current_user` returns `{"id": "stub-user"}` for any bearer token. Token stored in `localStorage["symphony_token"]`, fallback `"dev-token"`.
 - CORS: allow all origins in dev (fastapi CORSMiddleware).
 
-## Backend Structure (symph-back-end)
+## Backend Structure (vageesh-back-end)
 
 ```
 app/
@@ -41,7 +41,7 @@ requirements.txt
 - MCP audit log writes are fire-and-forget: `asyncio.create_task(_audit(...))`. Failures swallowed with `logger.warning` so they never block tool responses.
 - MCP tools never store raw content/file bytes in `params_summary` — only metadata (title, content_length, key, top_k, file_type, encoded_length, etc.).
 
-## Frontend Structure (symph-front-end/src)
+## Frontend Structure (vageesh-front-end/src)
 
 - React 19 + TypeScript SPA, React Router v7, Vite
 - `js/api.ts` — all TypeScript interfaces + `apiFetch<T>()` + `WS_BASE`; one function per API endpoint

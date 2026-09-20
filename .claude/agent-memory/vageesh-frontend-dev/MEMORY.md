@@ -1,6 +1,6 @@
-# Symphony Frontend Dev Memory
+# Vageesh Frontend Dev Memory
 
-## Project Structure (symph-front-end/src)
+## Project Structure (vageesh-front-end/src)
 
 - React 19 + TypeScript SPA, React Router v7, Vite
 - `js/api.ts` — all TypeScript interfaces + `apiFetch<T>()` + `WS_BASE`; one function per API endpoint

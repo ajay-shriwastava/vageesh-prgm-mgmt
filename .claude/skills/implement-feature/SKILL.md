@@ -47,14 +47,14 @@ User Input
   • Translate to TechRequirementsBlock
     │
     ▼
-[symphony-tech-lead]
+[vageesh-tech-lead]
   • Designs APIContract (REST + WS endpoints, Pydantic schemas, DB models)
   • Considers LangGraph graph design if the feature involves agent execution
   • Spawns and coordinates developer agents in parallel
     │
     ├──────────────────────────────────────────┐
     ▼                                          ▼
-[symphony-frontend-developer]      [symphony-backend-developer]
+[vageesh-frontend-developer]      [vageesh-backend-developer]
   • React 19 + TypeScript pages/        • FastAPI routers + Pydantic schemas
     components (.tsx)                   • LangGraph graphs / nodes / edges
   • Vite project structure              • SQLAlchemy async models + Alembic migrations
@@ -63,7 +63,7 @@ User Input
     │                                          │
     └──────────────────┬────────────────────────┘
                        ▼
-          [symphony-tech-lead – review]
+          [vageesh-tech-lead – review]
             • Validates API integration
             • Checks LangGraph ↔ FastAPI wiring
             • Returns final merged deliverable
@@ -108,23 +108,23 @@ Produce a **TechRequirementsBlock** covering:
 
 ---
 
-## Step 3 — Spawn symphony-tech-lead
+## Step 3 — Spawn vageesh-tech-lead
 
-Invoke the **`symphony-tech-lead`** sub-agent directly. Do not look for a local agent
+Invoke the **`vageesh-tech-lead`** sub-agent directly. Do not look for a local agent
 file — the sub-agent is pre-configured externally.
 
 Pass it:
 1. The **TechRequirementsBlock** from Step 2.
 2. The fixed tech stack table from the "Project Context" section above.
-3. The instruction: *"Design the APIContract, then coordinate symphony-frontend-developer
-   and symphony-backend-developer in parallel to implement the feature. Validate
+3. The instruction: *"Design the APIContract, then coordinate vageesh-frontend-developer
+   and vageesh-backend-developer in parallel to implement the feature. Validate
    integration consistency before returning the merged deliverable."*
 
 ---
 
 ## Step 4 — Present Deliverables
 
-Once `symphony-tech-lead` returns, present:
+Once `vageesh-tech-lead` returns, present:
 
 1. **APIContract** — Pydantic schemas, endpoint specs, WebSocket message envelopes.
 2. **Backend files** — FastAPI routers, LangGraph graphs, SQLAlchemy models, Alembic migration.

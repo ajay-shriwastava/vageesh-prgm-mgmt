@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is the program management repository for **Symphony** — an Agentic AI Orchestration Platform. It serves as the planning, documentation, and architecture hub for the Symphony system, which consists of two sibling repositories:
+This is the program management repository for **Vageesh** — an Agentic AI Orchestration Platform. It serves as the planning, documentation, and architecture hub for the Vageesh system, which consists of two sibling repositories:
 
-- `symph-front-end` — React 19 + TypeScript SPA (Vite dev server)
-- `symph-back-end` — FastAPI backend running LangGraph agents
+- `vageesh-front-end` — React 19 + TypeScript SPA (Vite dev server)
+- `vageesh-back-end` — FastAPI backend running LangGraph agents
 
 ## Architecture
 
-Symphony is a multi-agent AI platform. The tech stack decisions recorded here:
+Vageesh is a multi-agent AI platform. The tech stack decisions recorded here:
 
 - **Frontend**: React 19 + TypeScript + React Router v7 + Vite; lazy-loaded routes, custom hooks, centralized config
 - **Backend**: FastAPI + LangGraph agents, running in a Python virtualenv named `symphony`
@@ -19,7 +19,7 @@ Symphony is a multi-agent AI platform. The tech stack decisions recorded here:
 
 ## Development Commands
 
-### Frontend (`symph-front-end`)
+### Frontend (`vageesh-front-end`)
 ```bash
 npm run dev        # Start Vite dev server at http://localhost:5173
 npm test           # Run Vitest tests
@@ -27,7 +27,7 @@ npm run lint       # ESLint
 # Quit: Ctrl+C
 ```
 
-### Backend (`symph-back-end`)
+### Backend (`vageesh-back-end`)
 ```bash
 mkvirtualenv symphony   # One-time setup
 workon symphony
@@ -41,7 +41,7 @@ fastapi dev              # Start server at http://127.0.0.1:8000
 
 ## Agent Definition Structure
 
-When designing or documenting agents for Symphony, use this template (from `doc/AgentDefinition.md`):
+When designing or documenting agents for Vageesh, use this template (from `doc/AgentDefinition.md`):
 
 ```
 - Name:

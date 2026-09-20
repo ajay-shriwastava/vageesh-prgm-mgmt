@@ -1,12 +1,12 @@
 
-# Symphony — Agentic AI Orchestration Platform
+# Vageesh — Agentic AI Orchestration Platform
 
 React + TypeScript frontend + FastAPI backend + PostgreSQL database.
 
 ---
 
 ## Architecture Diagram
-![Architecture Diagram for Symphony](doc/architecture.png)
+![Architecture Diagram for Vageesh](doc/architecture.png)
 
 ---
 
@@ -14,10 +14,10 @@ React + TypeScript frontend + FastAPI backend + PostgreSQL database.
 
 | Repo | Link | Purpose |
 |---|---|---|
-| **symph-back-end** | [github.com/ajay-shriwastava/symph-back-end](https://github.com/ajay-shriwastava/symph-back-end) | FastAPI server — REST API, LangGraph workflow execution, Slack bot, APScheduler cron, Alembic migrations, WebSocket broadcast, Docker Compose entry point |
-| **symph-front-end** | [github.com/ajay-shriwastava/symph-front-end](https://github.com/ajay-shriwastava/symph-front-end) | React + TypeScript SPA — visual workflow builder, agent management, live run panel, Vite dev server (local) / nginx (Docker) |
+| **vageesh-back-end** | [github.com/ajay-shriwastava/vageesh-back-end](https://github.com/ajay-shriwastava/vageesh-back-end) | FastAPI server — REST API, LangGraph workflow execution, Slack bot, APScheduler cron, Alembic migrations, WebSocket broadcast, Docker Compose entry point |
+| **vageesh-front-end** | [github.com/ajay-shriwastava/vageesh-front-end](https://github.com/ajay-shriwastava/vageesh-front-end) | React + TypeScript SPA — visual workflow builder, agent management, live run panel, Vite dev server (local) / nginx (Docker) |
 
-Both repos must be cloned side-by-side (`docker-compose.yml` in `symph-back-end` references `../symph-front-end`).
+Both repos must be cloned side-by-side (`docker-compose.yml` in `vageesh-back-end` references `../vageesh-front-end`).
 
 ---
 
@@ -35,27 +35,27 @@ Docker Desktop must be running before you start.
 
 ### 1. Clone the repositories
 
-Symphony consists of two repos that must sit next to each other in the same parent directory:
+Vageesh consists of two repos that must sit next to each other in the same parent directory:
 
 ```bash
-mkdir symphony && cd symphony
+mkdir vageesh && cd vageesh
 
-git clone https://github.com/ajay-shriwastava/symph-back-end.git
-git clone https://github.com/ajay-shriwastava/symph-front-end.git
+git clone https://github.com/ajay-shriwastava/vageesh-back-end.git
+git clone https://github.com/ajay-shriwastava/vageesh-front-end.git
 ```
 
 Your directory structure should look like this:
 
 ```
-symphony/
-  symph-back-end/     ← FastAPI backend (clone this first)
-  symph-front-end/    ← Vite frontend
+vageesh/
+  vageesh-back-end/     ← FastAPI backend (clone this first)
+  vageesh-front-end/    ← Vite frontend
 ```
 
 ### 2. Configure environment variables
 
 ```bash
-cd symph-back-end
+cd vageesh-back-end
 cp .env.example .env
 ```
 
@@ -88,7 +88,7 @@ First build takes 2–4 minutes (downloading base images, installing dependencie
 
 | URL | What you get |
 |---|---|
-| http://localhost | Symphony UI |
+| http://localhost | Vageesh UI |
 | http://localhost:8000/docs | Interactive API docs (Swagger UI) |
 
 ### 5. Stop
@@ -120,7 +120,7 @@ docker compose down -v       # stops containers AND deletes the database
 ## Quick Start — Docker
 
 ```bash
-cd symph-back-end
+cd vageesh-back-end
 cp .env.example .env          # fill in ANTHROPIC_API_KEY (and optional Slack tokens)
 docker compose up --build
 ```
@@ -141,7 +141,7 @@ brew services restart postgresql
 psql -U postgres -c "CREATE DATABASE symphony;"
 ```
 
-### 2. Backend (`symph-back-end`)
+### 2. Backend (`vageesh-back-end`)
 
 ```bash
 mkvirtualenv symphony
@@ -151,14 +151,14 @@ alembic upgrade head
 fastapi dev app/main.py        # → http://127.0.0.1:8000/docs
 ```
 
-### 3. Frontend (`symph-front-end`)
+### 3. Frontend (`vageesh-front-end`)
 
 ```bash
 npm install
 npm run dev                    # → http://localhost:5173
 ```
 
-> In local dev without Docker, set `VITE_API_BASE=http://localhost:8000` in `symph-front-end/.env`.
+> In local dev without Docker, set `VITE_API_BASE=http://localhost:8000` in `vageesh-front-end/.env`.
 
 ---
 
@@ -187,7 +187,7 @@ Each workflow carries its own `tool_config` — a per-workflow override for oper
 | Level | Where set | Purpose |
 |---|---|---|
 | `.env` | Server environment | Secrets and infra defaults (API keys, DB URLs, fallback paths) |
-| `workflow.tool_config` | Symphony UI | Operational params per workflow instance — override the env defaults |
+| `workflow.tool_config` | Vageesh UI | Operational params per workflow instance — override the env defaults |
 
 **Where to configure:**
 - **Workflow Builder** — click any tool or agent node in the canvas; param fields appear inline in the config panel (e.g. *Dataset Directory* under a `csv_scanner` node).
@@ -215,7 +215,7 @@ Per-agent settings managed via the UI (memory page):
 Upload PDF or plain text files, or paste raw text, to build a searchable vector knowledge base. Text is chunked, embedded via VoyageAI, and stored in PostgreSQL with pgvector. The Search tab performs semantic similarity search returning ranked chunks. File uploads accept `.pdf` (parsed with pypdf) and `.txt` (UTF-8 decode) via `POST /api/v1/knowledge/upload`.
 
 ### MCP Server
-Symphony exposes an MCP (Model Context Protocol) server at `POST /mcp` that provides controlled, audited access to agent memory and the knowledge base. All external clients — Slack bot, Claude Desktop, Cursor — go through this single gateway.
+Vageesh exposes an MCP (Model Context Protocol) server at `POST /mcp` that provides controlled, audited access to agent memory and the knowledge base. All external clients — Slack bot, Claude Desktop, Cursor — go through this single gateway.
 
 **8 tools across two categories:**
 
@@ -311,16 +311,16 @@ Start → Collect Job Stats → SRE Report Agent → Post to Slack → End
 
 ## Slack Integration
 
-Symphony includes a Socket Mode Slack bot that lets you chat with agents directly from Slack.
+Vageesh includes a Socket Mode Slack bot that lets you chat with agents directly from Slack.
 
 **Setup:**
 1. Create a Slack app at [api.slack.com/apps](https://api.slack.com/apps) with **Socket Mode** enabled
 2. Add bot scopes: `chat:write`, `im:history`, `app_mentions:read`
 3. Subscribe to events: `message.im`, `app_mention`
 4. Set `SLACK_BOT_TOKEN` and `SLACK_APP_TOKEN` in `.env`
-5. In the Symphony UI (**Agent Configuration → Channels**), add `slack` to the target agent
+5. In the Vageesh UI (**Agent Configuration → Channels**), add `slack` to the target agent
 
-If tokens are not set, the bot silently disables itself and the rest of Symphony runs normally.
+If tokens are not set, the bot silently disables itself and the rest of Vageesh runs normally.
 
 ---
 
@@ -328,7 +328,7 @@ If tokens are not set, the bot silently disables itself and the rest of Symphony
 
 1. Sign up at [smith.langchain.com](https://smith.langchain.com) and create a project named `symphony`
 2. Generate an API key under **Settings → API Keys**
-3. Add to `symph-back-end/.env`:
+3. Add to `vageesh-back-end/.env`:
    ```
    LANGCHAIN_TRACING_V2=true
    LANGCHAIN_API_KEY=lsv2_pt_...
