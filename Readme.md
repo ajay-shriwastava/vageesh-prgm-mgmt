@@ -371,3 +371,7 @@ All endpoints under `/api/v1`. Auth is a stub — any non-empty Bearer token is 
 - [LangSmith documentation](https://docs.smith.langchain.com/)
 - [LangGraph documentation](https://langchain-ai.github.io/langgraph/)
 - [Slack Bolt / Socket Mode](https://slack.dev/bolt-python/concepts)
+
+---
+
+Licensed under the Apache License 2.0. Copyright 2026 Ajay Shriwastava.
