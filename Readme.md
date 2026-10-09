@@ -14,7 +14,7 @@ React + TypeScript frontend + FastAPI backend + PostgreSQL database.
 
 | Repo | Link | Purpose |
 |---|---|---|
-| **vageesh-back-end** | [github.com/ajay-shriwastava/vageesh-back-end](https://github.com/ajay-shriwastava/vageesh-back-end) | FastAPI server — REST API, LangGraph workflow execution, Slack bot, APScheduler cron, Alembic migrations, WebSocket broadcast, Docker Compose entry point |
+| **vageesh-back-end** | [github.com/ajay-shriwastava/vageesh-back-end](https://github.com/ajay-shriwastava/vageesh-back-end) | FastAPI server — REST API, LangGraph workflow execution, Slack bot, Alembic migrations, WebSocket broadcast, Docker Compose entry point |
 | **vageesh-front-end** | [github.com/ajay-shriwastava/vageesh-front-end](https://github.com/ajay-shriwastava/vageesh-front-end) | React + TypeScript SPA — visual workflow builder, agent management, live run panel, Vite dev server (local) / nginx (Docker) |
 
 Both repos must be cloned side-by-side (`docker-compose.yml` in `vageesh-back-end` references `../vageesh-front-end`).
@@ -110,7 +110,6 @@ docker compose down -v       # stops containers AND deletes the database
 | Agent runtime | LangGraph + langchain-anthropic (integrated into FastAPI services) |
 | Real-time | FastAPI WebSocket endpoints, ConnectionManager pattern (`app/ws_manager.py`) |
 | Messaging | Slack Socket Mode bot (`app/slack_bot.py`) |
-| Scheduling | APScheduler cron integration (`app/scheduler.py`) |
 | MCP | FastMCP server at `POST /mcp` — agent memory + knowledge base tools with audit log |
 | Observability | LangSmith tracing (opt-in via env vars) |
 | Containerisation | Docker Compose (single-command setup) |
